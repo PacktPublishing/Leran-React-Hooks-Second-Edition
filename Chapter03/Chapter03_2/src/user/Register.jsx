@@ -1,6 +1,14 @@
-export function Register() {
+import { PropTypes } from 'prop-types'
+
+export function Register({ onRegister }) {
+  function handleSubmit(e) {
+    e.preventDefault()
+    const username = e.target.elements.username.value
+    onRegister(username)
+  }
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor='register-username'>Username: </label>
       <input type='text' name='username' id='register-username' />
       <br />
@@ -17,4 +25,8 @@ export function Register() {
       <input type='submit' value='Register' />
     </form>
   )
+}
+
+Register.propTypes = {
+  onRegister: PropTypes.func.isRequired,
 }

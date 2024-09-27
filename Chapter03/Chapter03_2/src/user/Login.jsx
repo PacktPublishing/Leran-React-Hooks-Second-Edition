@@ -1,6 +1,14 @@
-export function Login() {
+import { PropTypes } from 'prop-types'
+
+export function Login({ onLogin }) {
+  function handleSubmit(e) {
+    e.preventDefault()
+    const username = e.target.elements.username.value
+    onLogin(username)
+  }
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={handleSubmit}>
       <label htmlFor='login-username'>Username: </label>
       <input type='text' name='username' id='login-username' />
       <br />
@@ -10,4 +18,8 @@ export function Login() {
       <input type='submit' value='Login' />
     </form>
   )
+}
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
 }
