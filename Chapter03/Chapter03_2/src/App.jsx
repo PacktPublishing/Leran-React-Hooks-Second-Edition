@@ -1,9 +1,9 @@
+import { useState } from 'react'
 import { UserBar } from './user/UserBar.jsx'
 import { CreatePost } from './post/CreatePost.jsx'
 import { PostList } from './post/PostList.jsx'
 
-const username = 'Daniel Bugl'
-const posts = [
+const defaultPosts = [
   {
     title: 'React Hooks',
     content: 'The greatest thing since sliced bread!',
@@ -17,11 +17,15 @@ const posts = [
 ]
 
 export function App() {
+  const [posts, setPosts] = useState(defaultPosts)
+  const [username, setUsername] = useState('')
   return (
     <div style={{ padding: 8 }}>
-      <UserBar />
+      <UserBar username={username} setUsername={setUsername} />
       <br />
-      <CreatePost username={username} />
+      {username && (
+        <CreatePost username={username} posts={posts} setPosts={setPosts} />
+      )}
       <hr />
       <PostList posts={posts} />
     </div>

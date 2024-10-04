@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { PropTypes } from 'prop-types'
 import { Login } from './Login.jsx'
 import { Logout } from './Logout.jsx'
 import { Register } from './Register.jsx'
 
-export function UserBar() {
-  const [username, setUsername] = useState('')
+export function UserBar({ username, setUsername }) {
   if (username) {
     return <Logout username={username} onLogout={() => setUsername('')} />
   } else {
@@ -16,4 +15,9 @@ export function UserBar() {
       </>
     )
   }
+}
+
+UserBar.propTypes = {
+  username: PropTypes.string.isRequired,
+  setUsername: PropTypes.func.isRequired,
 }

@@ -8,9 +8,9 @@ export function CreatePost({ username }) {
       </div>
       <div>
         <label htmlFor='create-title'>Title:</label>
-        <input type='text' name='create-title' id='create-title' />
+        <input type='text' name='title' id='create-title' />
       </div>
-      <textarea />
+      <textarea name='content' />
       <input type='submit' value='Create' />
     </form>
   )
