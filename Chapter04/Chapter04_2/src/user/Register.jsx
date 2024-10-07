@@ -1,8 +1,18 @@
 import { PropTypes } from 'prop-types'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function Register({ onRegister }) {
+  const [password, setPassword] = useState('')
+  const [repeatPassword, setRepeatPassword] = useState('')
   const [invalidRepeat, setInvalidRepeat] = useState(false)
+
+  useEffect(() => {
+    if (password !== repeatPassword) {
+      setInvalidRepeat(true)
+    } else {
+      setInvalidRepeat(false)
+    }
+  }, [password, repeatPassword, setInvalidRepeat])
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -24,7 +34,14 @@ export function Register({ onRegister }) {
       <input type='text' name='username' id='register-username' required />
       <br />
       <label htmlFor='register-password'>Password: </label>
-      <input type='password' name='password' id='register-password' required />
+      <input
+        type='password'
+        name='password'
+        id='register-password'
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <br />
       <label htmlFor='register-password-repeat'>Repeat password: </label>
       <input
@@ -32,6 +49,8 @@ export function Register({ onRegister }) {
         name='password-repeat'
         id='register-password-repeat'
         required
+        value={repeatPassword}
+        onChange={(e) => setRepeatPassword(e.target.value)}
       />
       <br />
       {invalidRepeat && (
