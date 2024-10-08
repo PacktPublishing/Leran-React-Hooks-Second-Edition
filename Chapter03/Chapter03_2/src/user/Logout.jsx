@@ -1,9 +1,9 @@
 import { PropTypes } from 'prop-types'
 
-export function Logout({ username, onLogout }) {
+export function Logout({ username, setUsername }) {
   function handleSubmit(e) {
     e.preventDefault()
-    onLogout()
+    setUsername('')
   }
 
   return (
@@ -16,5 +16,5 @@ export function Logout({ username, onLogout }) {
 
 Logout.propTypes = {
   username: PropTypes.string.isRequired,
-  onLogout: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
 }

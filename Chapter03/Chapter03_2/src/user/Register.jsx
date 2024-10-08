@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types'
 import { useState } from 'react'
 
-export function Register({ onRegister }) {
+export function Register({ setUsername }) {
   const [invalidRepeat, setInvalidRepeat] = useState(false)
 
   function handleSubmit(e) {
@@ -15,7 +15,7 @@ export function Register({ onRegister }) {
     }
     setInvalidRepeat(false)
     const username = e.target.elements.username.value
-    onRegister(username)
+    setUsername(username)
   }
 
   return (
@@ -43,5 +43,5 @@ export function Register({ onRegister }) {
 }
 
 Register.propTypes = {
-  onRegister: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
 }

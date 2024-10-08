@@ -5,13 +5,13 @@ import { Register } from './Register.jsx'
 
 export function UserBar({ username, setUsername }) {
   if (username) {
-    return <Logout username={username} onLogout={() => setUsername('')} />
+    return <Logout username={username} setUsername={setUsername} />
   } else {
     return (
       <>
-        <Login onLogin={(username) => setUsername(username)} />
+        <Login setUsername={setUsername} />
         <hr />
-        <Register onRegister={(username) => setUsername(username)} />
+        <Register setUsername={setUsername} />
       </>
     )
   }

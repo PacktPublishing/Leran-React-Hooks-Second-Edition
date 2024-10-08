@@ -1,10 +1,10 @@
 import { PropTypes } from 'prop-types'
 
-export function Login({ onLogin }) {
+export function Login({ setUsername }) {
   function handleSubmit(e) {
     e.preventDefault()
     const username = e.target.elements.username.value
-    onLogin(username)
+    setUsername(username)
   }
 
   return (
@@ -21,5 +21,5 @@ export function Login({ onLogin }) {
 }
 
 Login.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
 }
