@@ -1,7 +1,8 @@
-import { PropTypes } from 'prop-types'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext'
 
-export function Register({ setUsername }) {
+export function Register() {
+  const [, setUsername] = useContext(UserContext)
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [invalidRepeat, setInvalidRepeat] = useState(false)
@@ -59,8 +60,4 @@ export function Register({ setUsername }) {
       <input type='submit' value='Register' />
     </form>
   )
-}
-
-Register.propTypes = {
-  setUsername: PropTypes.func.isRequired,
 }

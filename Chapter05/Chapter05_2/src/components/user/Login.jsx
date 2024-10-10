@@ -1,6 +1,9 @@
-import { PropTypes } from 'prop-types'
+import { useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext'
 
-export function Login({ setUsername }) {
+export function Login() {
+  const [, setUsername] = useContext(UserContext)
+
   function handleSubmit(e) {
     e.preventDefault()
     const username = e.target.elements.username.value
@@ -18,8 +21,4 @@ export function Login({ setUsername }) {
       <input type='submit' value='Login' />
     </form>
   )
-}
-
-Login.propTypes = {
-  setUsername: PropTypes.func.isRequired,
 }

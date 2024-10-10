@@ -4,6 +4,7 @@ import { UserBar } from './components/user/UserBar.jsx'
 import { CreatePost } from './components/post/CreatePost.jsx'
 import { PostList } from './components/post/PostList.jsx'
 import { ThemeContext } from './contexts/ThemeContext.js'
+import { UserContext } from './contexts/UserContext.js'
 
 const featuredPosts = [
   {
@@ -30,17 +31,19 @@ export function App() {
   const [posts, dispatch] = useReducer(postsReducer, defaultPosts)
   const [username, setUsername] = useState('')
   return (
-    <ThemeContext value={{ primaryColor: 'black' }}>
-      <div style={{ padding: 8 }}>
-        <UserBar username={username} setUsername={setUsername} />
-        <br />
-        {username && <CreatePost username={username} dispatch={dispatch} />}
-        <hr />
-        <ThemeContext value={{ primaryColor: 'salmon' }}>
-          <PostList posts={featuredPosts} />
-        </ThemeContext>
-        <PostList posts={posts} />
-      </div>
-    </ThemeContext>
+    <UserContext value={[username, setUsername]}>
+      <ThemeContext value={{ primaryColor: 'black' }}>
+        <div style={{ padding: 8 }}>
+          <UserBar />
+          <br />
+          {username && <CreatePost dispatch={dispatch} />}
+          <hr />
+          <ThemeContext value={{ primaryColor: 'salmon' }}>
+            <PostList posts={featuredPosts} />
+          </ThemeContext>
+          <PostList posts={posts} />
+        </div>
+      </ThemeContext>
+    </UserContext>
   )
 }

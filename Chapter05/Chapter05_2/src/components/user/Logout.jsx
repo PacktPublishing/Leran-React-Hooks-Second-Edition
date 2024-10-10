@@ -1,6 +1,9 @@
-import { PropTypes } from 'prop-types'
+import { useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext'
 
-export function Logout({ username, setUsername }) {
+export function Logout() {
+  const [username, setUsername] = useContext(UserContext)
+
   function handleSubmit(e) {
     e.preventDefault()
     setUsername('')
@@ -12,9 +15,4 @@ export function Logout({ username, setUsername }) {
       <input type='submit' value='Logout' />
     </form>
   )
-}
-
-Logout.propTypes = {
-  username: PropTypes.string.isRequired,
-  setUsername: PropTypes.func.isRequired,
 }

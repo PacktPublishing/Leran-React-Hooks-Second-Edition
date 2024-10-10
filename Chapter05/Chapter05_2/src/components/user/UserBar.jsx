@@ -1,23 +1,20 @@
-import { PropTypes } from 'prop-types'
+import { useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext.js'
 import { Login } from './Login.jsx'
 import { Logout } from './Logout.jsx'
 import { Register } from './Register.jsx'
 
-export function UserBar({ username, setUsername }) {
+export function UserBar() {
+  const [username] = useContext(UserContext)
   if (username) {
-    return <Logout username={username} setUsername={setUsername} />
+    return <Logout />
   } else {
     return (
       <>
-        <Login setUsername={setUsername} />
+        <Login />
         <hr />
-        <Register setUsername={setUsername} />
+        <Register />
       </>
     )
   }
-}
-
-UserBar.propTypes = {
-  username: PropTypes.string.isRequired,
-  setUsername: PropTypes.func.isRequired,
 }
