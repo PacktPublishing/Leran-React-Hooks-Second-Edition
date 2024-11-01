@@ -1,0 +1,17 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "React Hooks",
+      "content": "The greatest thing since sliced bread!",
+      "author": "Daniel Bugl"
+    },
+    {
+      "id": "2",
+      "title": "Using React Fragments",
+      "content": "Keeping the DOM tree clean!",
+      "author": "Daniel Bugl"
+    }
+  ],
+  "users": [{ "id": "1", "username": "Daniel Bugl", "password": "hunter2" }]
+}
