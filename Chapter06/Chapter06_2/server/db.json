@@ -11,7 +11,20 @@
       "title": "Using React Fragments",
       "content": "Keeping the DOM tree clean!",
       "author": "Daniel Bugl"
+    },
+    {
+      "id": "3",
+      "title": "React Context",
+      "content": "Manage global state with ease!",
+      "author": "Daniel Bugl",
+      "featured": true
     }
   ],
-  "users": [{ "id": "1", "username": "Daniel Bugl", "password": "hunter2" }]
+  "users": [
+    {
+      "id": "1",
+      "username": "Daniel Bugl",
+      "password": "hunter2"
+    }
+  ]
 }

@@ -1,11 +1,27 @@
 import { PropTypes } from 'prop-types'
+import { useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext.js'
 
-export function CreatePost({ username, dispatch }) {
-  function handleSubmit(e) {
+export function CreatePost({ dispatch }) {
+  const [username] = useContext(UserContext)
+
+  async function handleSubmit(e) {
     e.preventDefault()
+
     const title = e.target.elements.title.value
     const content = e.target.elements.content.value
     const post = { title, content, author: username }
+
+    const response = await fetch('/api/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(post),
+    })
+
+    if (!response.ok) {
+      throw new Error('Unable to create post')
+    }
+
     dispatch({ type: 'CREATE_POST', post })
     e.target.reset()
   }
@@ -26,6 +42,5 @@ export function CreatePost({ username, dispatch }) {
 }
 
 CreatePost.propTypes = {
-  username: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 }

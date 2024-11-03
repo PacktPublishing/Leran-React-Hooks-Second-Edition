@@ -1,6 +1,10 @@
 import { PropTypes } from 'prop-types'
+import { useContext } from 'react'
+import { UserContext } from '@/contexts/UserContext.js'
 
-export function CreatePost({ username, dispatch }) {
+export function CreatePost({ dispatch }) {
+  const [username] = useContext(UserContext)
+
   function handleSubmit(e) {
     e.preventDefault()
     const title = e.target.elements.title.value
@@ -26,6 +30,5 @@ export function CreatePost({ username, dispatch }) {
 }
 
 CreatePost.propTypes = {
-  username: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 }
