@@ -4,13 +4,15 @@
       "id": "1",
       "title": "React Hooks",
       "content": "The greatest thing since sliced bread!",
-      "author": "Daniel Bugl"
+      "author": "Daniel Bugl",
+      "featured": false
     },
     {
       "id": "2",
       "title": "Using React Fragments",
       "content": "Keeping the DOM tree clean!",
-      "author": "Daniel Bugl"
+      "author": "Daniel Bugl",
+      "featured": false
     },
     {
       "id": "3",

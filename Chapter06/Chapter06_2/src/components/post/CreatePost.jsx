@@ -10,7 +10,7 @@ export function CreatePost({ dispatch }) {
 
     const title = e.target.elements.title.value
     const content = e.target.elements.content.value
-    const post = { title, content, author: username }
+    const post = { title, content, author: username, featured: false }
 
     const response = await fetch('/api/posts', {
       method: 'POST',
