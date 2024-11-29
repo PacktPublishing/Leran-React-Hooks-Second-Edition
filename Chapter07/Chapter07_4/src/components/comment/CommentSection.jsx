@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import { useState, useTransition } from 'react'
 import { CommentList } from './CommentList.jsx'
 
-export function CommentSection({ postId }) {
+export function CommentSection() {
   const [showComments, setShowComments] = useState(false)
   const [isPending, startTransition] = useTransition()
 
@@ -17,11 +16,7 @@ export function CommentSection({ postId }) {
       <button onClick={handleClick} disabled={isPending}>
         {showComments ? 'Hide' : 'Show'} comments
       </button>
-      {showComments && <CommentList postId={postId} />}
+      {showComments && <CommentList />}
     </div>
   )
-}
-
-CommentSection.propTypes = {
-  postId: PropTypes.string.isRequired,
 }

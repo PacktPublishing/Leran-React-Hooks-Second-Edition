@@ -1,20 +1,14 @@
-import PropTypes from 'prop-types'
-import { useContext, useOptimistic } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { fetchComments } from '@/api.js'
+import { useContext, useState, useOptimistic } from 'react'
 import { UserContext } from '@/contexts/UserContext.js'
 import { CreateComment } from './CreateComment.jsx'
 import { Comment } from './Comment.jsx'
 
-export function CommentList({ postId }) {
+export function CommentList() {
   const [username] = useContext(UserContext)
-  const { data } = useQuery({
-    queryKey: ['comments', postId],
-    queryFn: async () => await fetchComments({ postId }),
-  })
+  const [comments, setComments] = useState([])
 
   const [optimisticComments, addOptimisticComment] = useOptimistic(
-    data,
+    comments,
     (state, comment) => [
       ...state,
       {
@@ -26,21 +20,18 @@ export function CommentList({ postId }) {
 
   return (
     <div>
-      {optimisticComments?.map((comment) => (
-        <div key={comment.id}>
+      {optimisticComments?.map((comment, index) => (
+        <div key={index}>
           <Comment {...comment} />
         </div>
       ))}
+      {optimisticComments.length === 0 && <i>No comments</i>}
       {username && (
         <CreateComment
-          postId={postId}
+          setComments={setComments}
           addOptimisticComment={addOptimisticComment}
         />
       )}
     </div>
   )
-}
-
-CommentList.propTypes = {
-  postId: PropTypes.string.isRequired,
 }

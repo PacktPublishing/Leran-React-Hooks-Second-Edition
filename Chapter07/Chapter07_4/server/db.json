@@ -35,13 +35,5 @@
       "username": "Daniel Bugl",
       "password": "hunter2"
     }
-  ],
-  "comments": [
-    {
-      "id": "1",
-      "postId": "1",
-      "content": "I agree!",
-      "author": "Jane Doe"
-    }
   ]
 }
