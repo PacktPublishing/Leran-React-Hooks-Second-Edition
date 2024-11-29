@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types'
 import { useContext } from 'react'
 import { ThemeContext } from '@/contexts/ThemeContext.js'
+import { CommentSection } from '@/components/comment/CommentSection.jsx'
 
 export function Post({ title, content, author }) {
   const theme = useContext(ThemeContext)
@@ -12,6 +13,9 @@ export function Post({ title, content, author }) {
       <i>
         Written by <b>{author}</b>
       </i>
+      <br />
+      <br />
+      <CommentSection />
     </div>
   )
 }
