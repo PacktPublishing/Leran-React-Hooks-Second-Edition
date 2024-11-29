@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '@/contexts/ThemeContext.js'
 import { CommentSection } from '@/components/comment/CommentSection.jsx'
 
-export function Post({ id, title, content, author }) {
+export function Post({ title, content, author }) {
   const theme = useContext(ThemeContext)
   return (
     <div>
@@ -15,13 +15,12 @@ export function Post({ id, title, content, author }) {
       </i>
       <br />
       <br />
-      <CommentSection postId={id} />
+      <CommentSection />
     </div>
   )
 }
 
 Post.propTypes = {
-  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,

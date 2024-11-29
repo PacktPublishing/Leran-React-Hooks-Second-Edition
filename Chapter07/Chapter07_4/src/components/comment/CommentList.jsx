@@ -18,6 +18,12 @@ export function CommentList() {
     ],
   )
 
+  async function addComment(comment) {
+    addOptimisticComment(comment)
+    await new Promise((resolve) => setTimeout(resolve, 10000))
+    setComments((prev) => [...prev, comment])
+  }
+
   return (
     <div>
       {optimisticComments?.map((comment, index) => (
@@ -26,12 +32,7 @@ export function CommentList() {
         </div>
       ))}
       {optimisticComments.length === 0 && <i>No comments</i>}
-      {username && (
-        <CreateComment
-          setComments={setComments}
-          addOptimisticComment={addOptimisticComment}
-        />
-      )}
+      {username && <CreateComment addComment={addComment} />}
     </div>
   )
 }

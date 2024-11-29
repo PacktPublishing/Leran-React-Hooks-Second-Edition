@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types'
+import { PropTypes } from 'prop-types'
 import { useContext } from 'react'
 import { UserContext } from '@/contexts/UserContext.js'
 
-export function CreateComment({ setComments, addOptimisticComment }) {
+export function CreateComment({ addComment }) {
   const [username] = useContext(UserContext)
 
   async function submitAction(formData) {
@@ -11,9 +11,7 @@ export function CreateComment({ setComments, addOptimisticComment }) {
       author: username,
       content,
     }
-    addOptimisticComment(comment)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setComments((prev) => [...prev, comment])
+    await addComment(comment)
   }
 
   return (
@@ -25,6 +23,5 @@ export function CreateComment({ setComments, addOptimisticComment }) {
 }
 
 CreateComment.propTypes = {
-  setComments: PropTypes.func.isRequired,
-  addOptimisticComment: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
 }

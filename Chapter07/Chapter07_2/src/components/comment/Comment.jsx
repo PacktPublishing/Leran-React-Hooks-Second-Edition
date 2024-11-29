@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types'
 export function Comment({ content, author }) {
   let startTime = performance.now()
   while (performance.now() - startTime < 1) {
-    // Do nothing for 1 ms per item to emulate extremely slow code
+    // do nothing for 1 ms
   }
   return (
     <div style={{ padding: '0.5em 0' }}>

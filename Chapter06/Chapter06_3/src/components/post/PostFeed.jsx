@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import { PropTypes } from 'prop-types'
 import { useQuery } from '@tanstack/react-query'
 import { PostList } from './PostList.jsx'
 import { fetchPosts } from '@/api.js'
