@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router'
 import {
   QueryClientProvider,
   QueryErrorResetBoundary,
@@ -12,6 +12,7 @@ import { ThemeContext } from './contexts/ThemeContext.js'
 import { UserContext } from './contexts/UserContext.js'
 import { FetchErrorNotice } from './FetchErrorNotice.jsx'
 import { Home } from './pages/Home.jsx'
+import { ViewPost } from './pages/ViewPost.jsx'
 
 export function App() {
   const [username, setUsername] = useState('')
@@ -20,26 +21,36 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <UserContext value={[username, setUsername]}>
         <ThemeContext value={{ primaryColor: 'black' }}>
-          <div style={{ padding: 8 }}>
-            <UserBar />
-            <br />
-            {username && <CreatePost />}
-            <hr />
-            <QueryErrorResetBoundary>
-              {({ reset }) => (
-                <ErrorBoundary
-                  onReset={reset}
-                  fallbackRender={FetchErrorNotice}
-                >
-                  <BrowserRouter>
+          <BrowserRouter>
+            <div style={{ padding: 8 }}>
+              <NavLink
+                to='/'
+                style={({ isActive }) => ({
+                  fontWeight: isActive ? 'bold' : 'normal',
+                })}
+              >
+                Home
+              </NavLink>
+              <hr />
+              <UserBar />
+              <br />
+              {username && <CreatePost />}
+              <hr />
+              <QueryErrorResetBoundary>
+                {({ reset }) => (
+                  <ErrorBoundary
+                    onReset={reset}
+                    fallbackRender={FetchErrorNotice}
+                  >
                     <Routes>
                       <Route index element={<Home />} />
+                      <Route path='post/:id' element={<ViewPost />} />
                     </Routes>
-                  </BrowserRouter>
-                </ErrorBoundary>
-              )}
-            </QueryErrorResetBoundary>
-          </div>
+                  </ErrorBoundary>
+                )}
+              </QueryErrorResetBoundary>
+            </div>
+          </BrowserRouter>
         </ThemeContext>
       </UserContext>
     </QueryClientProvider>

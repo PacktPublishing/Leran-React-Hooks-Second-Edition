@@ -20,26 +20,26 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <UserContext value={[username, setUsername]}>
         <ThemeContext value={{ primaryColor: 'black' }}>
-          <div style={{ padding: 8 }}>
-            <UserBar />
-            <br />
-            {username && <CreatePost />}
-            <hr />
-            <QueryErrorResetBoundary>
-              {({ reset }) => (
-                <ErrorBoundary
-                  onReset={reset}
-                  fallbackRender={FetchErrorNotice}
-                >
-                  <BrowserRouter>
+          <BrowserRouter>
+            <div style={{ padding: 8 }}>
+              <UserBar />
+              <br />
+              {username && <CreatePost />}
+              <hr />
+              <QueryErrorResetBoundary>
+                {({ reset }) => (
+                  <ErrorBoundary
+                    onReset={reset}
+                    fallbackRender={FetchErrorNotice}
+                  >
                     <Routes>
                       <Route index element={<Home />} />
                     </Routes>
-                  </BrowserRouter>
-                </ErrorBoundary>
-              )}
-            </QueryErrorResetBoundary>
-          </div>
+                  </ErrorBoundary>
+                )}
+              </QueryErrorResetBoundary>
+            </div>
+          </BrowserRouter>
         </ThemeContext>
       </UserContext>
     </QueryClientProvider>

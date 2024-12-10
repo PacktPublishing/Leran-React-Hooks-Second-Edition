@@ -1,13 +1,17 @@
-import { PropTypes } from 'prop-types'
-import { useContext } from 'react'
-import { ThemeContext } from '@/contexts/ThemeContext.js'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { CommentSection } from '@/components/comment/CommentSection.jsx'
+import { fetchPost } from '@/api.js'
 
-export function Post({ title, content, author }) {
-  const theme = useContext(ThemeContext)
+export function Post({ id }) {
+  const { data } = useSuspenseQuery({
+    queryKey: ['post', id],
+    queryFn: async () => await fetchPost({ id }),
+  })
+  const { title, content, author } = data
+
   return (
     <div>
-      <h3 style={{ color: theme.primaryColor }}>{title}</h3>
+      <h3>{title}</h3>
       <div>{content}</div>
       <br />
       <i>
@@ -18,10 +22,4 @@ export function Post({ title, content, author }) {
       <CommentSection />
     </div>
   )
-}
-
-Post.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
 }

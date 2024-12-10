@@ -1,10 +1,12 @@
 import { useContext, useActionState } from 'react'
+import { useNavigate } from 'react-router'
 import { useMutation } from '@tanstack/react-query'
 import { createPost, queryClient } from '@/api.js'
 import { UserContext } from '@/contexts/UserContext.js'
 
 export function CreatePost() {
   const [username] = useContext(UserContext)
+  const navigate = useNavigate()
 
   const createPostMutation = useMutation({
     mutationFn: createPost,
@@ -19,7 +21,8 @@ export function CreatePost() {
       const content = formData.get('content')
       const post = { title, content, author: username, featured: false }
       try {
-        await createPostMutation.mutateAsync(post)
+        const result = await createPostMutation.mutateAsync(post)
+        navigate(`/post/${result.id}`)
       } catch (err) {
         return err
       }

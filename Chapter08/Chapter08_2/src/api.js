@@ -18,3 +18,8 @@ export async function createPost(post) {
   }
   return await res.json()
 }
+
+export async function fetchPost({ id }) {
+  const res = await fetch(`/api/posts/${id}`)
+  return await res.json()
+}
