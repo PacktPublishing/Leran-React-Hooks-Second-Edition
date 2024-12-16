@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router'
+import { BrowserRouter, Routes, Route } from 'react-router'
 import {
   QueryClientProvider,
   QueryErrorResetBoundary,
 } from '@tanstack/react-query'
 import { queryClient } from './api.js'
+import { NavBarLink } from './components/NavBarLink.jsx'
 import { UserBar } from './components/user/UserBar.jsx'
 import { CreatePost } from './components/post/CreatePost.jsx'
 import { ThemeContext } from './contexts/ThemeContext.js'
 import { UserContext } from './contexts/UserContext.js'
 import { FetchErrorNotice } from './FetchErrorNotice.jsx'
 import { Home } from './pages/Home.jsx'
+import { Demo } from './pages/Demo.jsx'
 import { ViewPost } from './pages/ViewPost.jsx'
 
 export function App() {
@@ -23,14 +25,9 @@ export function App() {
         <ThemeContext value={{ primaryColor: 'black' }}>
           <BrowserRouter>
             <div style={{ padding: 8 }}>
-              <NavLink
-                to='/'
-                style={({ isActive }) => ({
-                  fontWeight: isActive ? 'bold' : 'normal',
-                })}
-              >
-                Home
-              </NavLink>
+              <NavBarLink to='/'>Home</NavBarLink>
+              {' | '}
+              <NavBarLink to='/demo'>Demo</NavBarLink>
               <hr />
               <UserBar />
               <br />
@@ -45,6 +42,7 @@ export function App() {
                     <Routes>
                       <Route index element={<Home />} />
                       <Route path='post/:id' element={<ViewPost />} />
+                      <Route path='demo' element={<Demo />} />
                     </Routes>
                   </ErrorBoundary>
                 )}
