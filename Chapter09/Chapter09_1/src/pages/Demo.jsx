@@ -1,5 +1,5 @@
 import { AutoFocus } from '@/components/demo/useRef/AutoFocus.jsx'
-import { WidthMeasure } from '@/components/demo/useRef/WidthMeasure.jsx'
+import { InitialWidthMeasure } from '@/components/demo/useRef/InitialWidthMeasure.jsx'
 import { Timer } from '@/components/demo/useRef/Timer.jsx'
 
 export function Demo() {
@@ -8,7 +8,7 @@ export function Demo() {
       <h1>Demo Page</h1>
       <h2>useRef</h2>
       <AutoFocus />
-      <WidthMeasure />
+      <InitialWidthMeasure />
       <Timer />
     </div>
   )
