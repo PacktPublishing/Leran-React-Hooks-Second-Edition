@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { CustomInput } from './CustomInput.jsx'
 
 export function AutoFocus() {
   const inputRef = useRef(null)
@@ -6,7 +7,7 @@ export function AutoFocus() {
   return (
     <div>
       <h3>AutoFocus</h3>
-      <input ref={inputRef} type='text' />
+      <CustomInput ref={inputRef} />
     </div>
   )
 }
