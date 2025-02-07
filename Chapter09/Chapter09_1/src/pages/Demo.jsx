@@ -4,6 +4,7 @@ import { Timer } from '@/components/demo/useRef/Timer.jsx'
 import { HighlightFocus } from '@/components/demo/useImperativeHandle/HighlightFocus.jsx'
 import { AriaInput } from '@/components/demo/useId/AriaInput.jsx'
 import { OnlineIndicator } from '@/components/demo/useSyncExternalStore/OnlineIndicator.jsx'
+import { PostSearch } from '@/components/demo/useDeferredValue/PostSearch.jsx'
 
 export function Demo() {
   return (
@@ -19,6 +20,8 @@ export function Demo() {
       <AriaInput />
       <h2>useSyncExternalStore</h2>
       <OnlineIndicator />
+      <h2>useDeferredValue</h2>
+      <PostSearch />
     </div>
   )
 }
