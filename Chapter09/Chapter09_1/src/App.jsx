@@ -15,6 +15,7 @@ import { FetchErrorNotice } from './FetchErrorNotice.jsx'
 import { Home } from './pages/Home.jsx'
 import { Demo } from './pages/Demo.jsx'
 import { ViewPost } from './pages/ViewPost.jsx'
+import { Search } from './pages/Search.jsx'
 
 export function App() {
   const [username, setUsername] = useState('')
@@ -26,6 +27,8 @@ export function App() {
           <BrowserRouter>
             <div style={{ padding: 8 }}>
               <NavBarLink to='/'>Home</NavBarLink>
+              {' | '}
+              <NavBarLink to='/search'>Search</NavBarLink>
               {' | '}
               <NavBarLink to='/demo'>Demo</NavBarLink>
               <hr />
@@ -43,6 +46,7 @@ export function App() {
                       <Route index element={<Home />} />
                       <Route path='post/:id' element={<ViewPost />} />
                       <Route path='demo' element={<Demo />} />
+                      <Route path='search' element={<Search />} />
                     </Routes>
                   </ErrorBoundary>
                 )}
