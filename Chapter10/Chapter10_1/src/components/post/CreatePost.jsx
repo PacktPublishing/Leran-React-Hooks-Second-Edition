@@ -1,12 +1,14 @@
 import { useActionState } from 'react'
 import { useNavigate } from 'react-router'
 import { useMutation } from '@tanstack/react-query'
-import { useLocalStorage } from '@uidotdev/usehooks'
+import { useLocalStorage, useHistoryState } from '@uidotdev/usehooks'
 import { createPost, queryClient } from '@/api.js'
 
 export function CreatePost() {
   const [username] = useLocalStorage('username', null)
   const navigate = useNavigate()
+  const { state, set, undo, redo, clear, canUndo, canRedo } =
+    useHistoryState('')
 
   const createPostMutation = useMutation({
     mutationFn: createPost,
@@ -22,6 +24,7 @@ export function CreatePost() {
       const post = { title, content, author: username, featured: false }
       try {
         const result = await createPostMutation.mutateAsync(post)
+        clear()
         navigate(`/post/${result.id}`)
       } catch (err) {
         return err
@@ -38,7 +41,22 @@ export function CreatePost() {
         <label htmlFor='create-title'>Title:</label>
         <input type='text' name='title' id='create-title' />
       </div>
-      <textarea name='content' />
+      <div>
+        <button type='button' disabled={!canUndo} onClick={undo}>
+          Undo
+        </button>
+        <button type='button' disabled={!canRedo} onClick={redo}>
+          Redo
+        </button>
+        <button type='button' onClick={clear}>
+          Clear
+        </button>
+      </div>
+      <textarea
+        name='content'
+        value={state}
+        onChange={(e) => set(e.target.value)}
+      />
       <input type='submit' value='Create' disabled={isPending} />
       {error && <div style={{ color: 'red' }}>{error.toString()}</div>}
     </form>
