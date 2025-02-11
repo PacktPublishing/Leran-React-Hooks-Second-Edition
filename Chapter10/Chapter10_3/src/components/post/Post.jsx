@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { ThemeContext } from '@/contexts/ThemeContext.js'
 import { CommentSection } from '@/components/comment/CommentSection.jsx'
 import { fetchPost } from '@/api.js'
+import { CopyLink } from './CopyLink.jsx'
 
 export function Post({ id }) {
   const { data } = useSuspenseQuery({
@@ -15,7 +16,9 @@ export function Post({ id }) {
 
   return (
     <div>
-      <h3 style={{ color: theme.primaryColor }}>{title}</h3>
+      <h3 style={{ color: theme.primaryColor }}>
+        {title} <CopyLink url={window.location.href} />
+      </h3>
       <div>{content}</div>
       <br />
       <i>
