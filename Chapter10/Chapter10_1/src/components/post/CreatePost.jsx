@@ -10,6 +10,11 @@ export function CreatePost() {
   const { state, set, undo, redo, clear, canUndo, canRedo } =
     useHistoryState('')
 
+  function handleContentChange(e) {
+    const { value } = e.target
+    set(value)
+  }
+
   const createPostMutation = useMutation({
     mutationFn: createPost,
     onSuccess: () => {
@@ -52,11 +57,7 @@ export function CreatePost() {
           Clear
         </button>
       </div>
-      <textarea
-        name='content'
-        value={state}
-        onChange={(e) => set(e.target.value)}
-      />
+      <textarea name='content' value={state} onChange={handleContentChange} />
       <input type='submit' value='Create' disabled={isPending} />
       {error && <div style={{ color: 'red' }}>{error.toString()}</div>}
     </form>
