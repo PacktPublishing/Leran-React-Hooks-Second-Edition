@@ -1,9 +1,8 @@
 import { PropTypes } from 'prop-types'
-import { useContext } from 'react'
-import { UserContext } from '@/contexts/UserContext.js'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export function CreateComment({ addComment }) {
-  const [username] = useContext(UserContext)
+  const [username] = useLocalStorage('username', null)
 
   async function submitAction(formData) {
     const content = formData.get('content')

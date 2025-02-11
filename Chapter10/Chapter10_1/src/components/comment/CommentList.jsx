@@ -1,10 +1,10 @@
-import { useContext, useState, useOptimistic } from 'react'
-import { UserContext } from '@/contexts/UserContext.js'
+import { useState, useOptimistic } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import { CreateComment } from './CreateComment.jsx'
 import { Comment } from './Comment.jsx'
 
 export function CommentList() {
-  const [username] = useContext(UserContext)
+  const [username] = useLocalStorage('username', null)
   const [comments, setComments] = useState([])
 
   const [optimisticComments, addOptimisticComment] = useOptimistic(

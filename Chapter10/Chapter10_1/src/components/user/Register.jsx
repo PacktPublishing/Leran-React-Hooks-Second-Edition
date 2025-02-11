@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react'
-import { UserContext } from '@/contexts/UserContext'
+import { useState, useEffect } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export function Register() {
-  const [, setUsername] = useContext(UserContext)
+  const [, setUsername] = useLocalStorage('username', null)
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
   const [invalidRepeat, setInvalidRepeat] = useState(false)

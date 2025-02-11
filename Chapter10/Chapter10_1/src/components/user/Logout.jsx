@@ -1,8 +1,7 @@
-import { useContext } from 'react'
-import { UserContext } from '@/contexts/UserContext'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export function Logout() {
-  const [username, setUsername] = useContext(UserContext)
+  const [username, setUsername] = useLocalStorage('username', null)
 
   function handleSubmit(e) {
     e.preventDefault()

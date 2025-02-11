@@ -1,11 +1,11 @@
-import { useContext, useActionState } from 'react'
+import { useActionState } from 'react'
 import { useNavigate } from 'react-router'
 import { useMutation } from '@tanstack/react-query'
+import { useLocalStorage } from '@uidotdev/usehooks'
 import { createPost, queryClient } from '@/api.js'
-import { UserContext } from '@/contexts/UserContext.js'
 
 export function CreatePost() {
-  const [username] = useContext(UserContext)
+  const [username] = useLocalStorage('username', null)
   const navigate = useNavigate()
 
   const createPostMutation = useMutation({
