@@ -1,8 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useContext } from 'react'
-import { ThemeContext } from '@/contexts/ThemeContext.js'
 import { CommentSection } from '@/components/comment/CommentSection.jsx'
 import { fetchPost } from '@/api.js'
+import { useTheme } from '@/hooks/theme.js'
 import { CopyLink } from './CopyLink.jsx'
 
 export function Post({ id }) {
@@ -12,7 +11,7 @@ export function Post({ id }) {
   })
   const { title, content, author } = data
 
-  const theme = useContext(ThemeContext)
+  const theme = useTheme()
 
   return (
     <div>
