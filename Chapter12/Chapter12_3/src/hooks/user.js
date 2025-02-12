@@ -4,11 +4,11 @@ export function useUser() {
   const [username, setUsername] = useLocalStorage('username', null)
   const isLoggedIn = username !== null
 
-  function register() {
+  function register(username) {
     setUsername(username)
   }
 
-  function login() {
+  function login(username) {
     setUsername(username)
   }
 
