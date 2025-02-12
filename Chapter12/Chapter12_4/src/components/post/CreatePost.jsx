@@ -1,28 +1,14 @@
-import { useActionState, useState, useEffect } from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import { useActionState } from 'react'
 import { useNavigate } from 'react-router'
-import { useHistoryState } from '@uidotdev/usehooks'
 import { useUser } from '@/hooks/user.js'
 import { useAPICreatePost } from '@/hooks/api.js'
+import { useDebouncedHistoryState } from '@/hooks/debouncedHistoryState.js'
 
 export function CreatePost() {
   const { username } = useUser()
   const navigate = useNavigate()
-  const { state, set, undo, redo, clear, canUndo, canRedo } =
-    useHistoryState('')
-  const [content, setContent] = useState('')
-  const debounced = useDebouncedCallback((value) => set(value), 200)
-
-  useEffect(() => {
-    debounced.cancel()
-    setContent(state)
-  }, [state, debounced])
-
-  function handleContentChange(e) {
-    const { value } = e.target
-    setContent(value)
-    debounced(value)
-  }
+  const { content, handleContentChange, undo, redo, clear, canUndo, canRedo } =
+    useDebouncedHistoryState('', 200)
 
   const createPost = useAPICreatePost()
 
