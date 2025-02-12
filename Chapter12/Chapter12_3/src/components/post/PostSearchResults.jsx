@@ -1,11 +1,7 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
-import { searchPosts } from '@/api.js'
+import { useAPISearchPosts } from '@/hooks/api.js'
 import { PostList } from './PostList.jsx'
 
 export function PostSearchResults({ query }) {
-  const { data } = useSuspenseQuery({
-    queryKey: ['posts', query],
-    queryFn: async () => await searchPosts(query),
-  })
-  return <PostList posts={data} />
+  const posts = useAPISearchPosts({ query })
+  return <PostList posts={posts} />
 }

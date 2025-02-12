@@ -1,16 +1,10 @@
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { CommentSection } from '@/components/comment/CommentSection.jsx'
-import { fetchPost } from '@/api.js'
 import { useTheme } from '@/hooks/theme.js'
+import { useAPIFetchPost } from '@/hooks/api.js'
 import { CopyLink } from './CopyLink.jsx'
 
 export function Post({ id }) {
-  const { data } = useSuspenseQuery({
-    queryKey: ['post', id],
-    queryFn: async () => await fetchPost({ id }),
-  })
-  const { title, content, author } = data
-
+  const { title, content, author } = useAPIFetchPost({ id })
   const theme = useTheme()
 
   return (

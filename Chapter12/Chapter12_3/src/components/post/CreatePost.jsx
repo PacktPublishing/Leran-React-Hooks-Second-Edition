@@ -1,10 +1,9 @@
 import { useActionState, useState, useEffect } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useNavigate } from 'react-router'
-import { useMutation } from '@tanstack/react-query'
 import { useHistoryState } from '@uidotdev/usehooks'
 import { useUser } from '@/hooks/user.js'
-import { createPost, queryClient } from '@/api.js'
+import { useAPICreatePost } from '@/hooks/api.js'
 
 export function CreatePost() {
   const { username } = useUser()
@@ -25,12 +24,7 @@ export function CreatePost() {
     debounced(value)
   }
 
-  const createPostMutation = useMutation({
-    mutationFn: createPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries(['posts'])
-    },
-  })
+  const createPost = useAPICreatePost()
 
   const [error, submitAction, isPending] = useActionState(
     async (currentState, formData) => {
@@ -38,7 +32,7 @@ export function CreatePost() {
       const content = formData.get('content')
       const post = { title, content, author: username, featured: false }
       try {
-        const result = await createPostMutation.mutateAsync(post)
+        const result = await createPost(post)
         clear()
         navigate(`/post/${result.id}`)
       } catch (err) {
