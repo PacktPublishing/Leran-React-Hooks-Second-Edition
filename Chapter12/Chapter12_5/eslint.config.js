@@ -39,4 +39,9 @@ export default [
     },
   },
   prettierConfig,
+  {
+    env: {
+      'vitest-globals/env': true,
+    },
+  },
 ]
